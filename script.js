@@ -159,44 +159,56 @@ async function logout() {
     if (currentMode === 'vision') speakText('已退出登录');
 }
 
+// 👉 模拟注册（本地存储）
 async function register(username, password) {
-    const result = await callAPI('/register', {
-        method: 'POST',
-        body: JSON.stringify({ username, password })
-    });
-    
-    if (result.success) {
-        currentUser = result.data.user;
+    // 检查是否已存在
+    let exists = users.some(u => u.username === username);
+    if (exists) {
+        alert('用户名已存在！');
+        return false;
+    }
+
+    // 加入本地用户列表
+    let newUser = { username, password };
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+
+    // 自动登录
+    currentUser = newUser;
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    updateUserInfo();
+    renderHome();
+    alert('注册成功！已自动登录');
+    if (currentMode === 'vision') speakText('注册成功');
+    return true;
+}
+// 👉 模拟登录（GitHub Pages专用）
+async function login(username, password) {
+    // 测试账号
+    if (username === 'test' && password === '123456') {
+        currentUser = { username: 'test' };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         updateUserInfo();
         renderHome();
-        if (currentMode === 'vision') speakText('注册成功，欢迎您');
+        if (currentMode === 'vision') speakText('登录成功');
+        alert('登录成功！测试账号：test / 123456');
         return true;
-    } else {
-        alert(result.data.message || '注册失败');
-        return false;
     }
-}
 
-async function login(username, password) {
-    const result = await callAPI('/login', {
-        method: 'POST',
-        body: JSON.stringify({ username, password })
-    });
-    
-    if (result.success) {
-        currentUser = result.data.user;
+    // 本地注册用户也能登录
+    let user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+        currentUser = user;
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         updateUserInfo();
         renderHome();
         if (currentMode === 'vision') speakText('登录成功');
         return true;
-    } else {
-        alert(result.data.message || '登录失败');
-        return false;
     }
-}
 
+    alert('账号或密码错误！测试账号：test / 123456');
+    return false;
+}
 function renderAuth() {
     currentPage = 'auth';
     appDiv.innerHTML = `
