@@ -1,0 +1,477 @@
+/* 全局变量 - 默认模式（老年简易模式） */
+:root {
+    --bg-color: #f5f7fa;
+    --text-color: #1f2d3d;
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --border-color: #e2e8f0;
+    --card-bg: #ffffff;
+    --font-size: 18px;
+    --line-height: 1.6;
+}
+
+/* 听障模式 - 高对比度大字体 */
+body.hearing-mode {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --primary-color: #ffcc00;
+    --primary-hover: #ffdd44;
+    --border-color: #444444;
+    --card-bg: #111111;
+    --font-size: 24px;
+    --line-height: 1.8;
+}
+
+/* 视障模式 - 高对比度+读屏优化 */
+body.vision-mode {
+    --bg-color: #000000;
+    --text-color: #ffff00;
+    --primary-color: #00ff00;
+    --primary-hover: #33ff33;
+    --border-color: #ffff00;
+    --card-bg: #000000;
+    --font-size: 20px;
+    --line-height: 1.8;
+}
+
+/* 老年模式 - 大字体柔和 */
+body.elder-mode {
+    --bg-color: #fff9e8;
+    --text-color: #2c3e50;
+    --primary-color: #e67e22;
+    --primary-hover: #f39c12;
+    --border-color: #dcdcdc;
+    --card-bg: #ffffff;
+    --font-size: 20px;
+    --line-height: 1.7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+    transition: all 0.3s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 键盘焦点指示器 */
+:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+button, a, [role="button"], input {
+    transition: all 0.2s;
+}
+
+button:focus-visible, a:focus-visible {
+    transform: scale(1.02);
+}
+
+/* 容器布局 */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 头部导航 */
+.header {
+    background-color: var(--card-bg);
+    border-bottom: 2px solid var(--border-color);
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 8px 16px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.username-display {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.mode-switch {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.mode-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.mode-btn.active {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* 主内容区域 */
+.main {
+    flex: 1;
+    padding: 40px 0;
+}
+
+/* 页脚 */
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    margin-top: auto;
+}
+
+/* 快捷入口卡片 */
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.quick-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.quick-card:hover {
+    transform: translateY(-4px);
+}
+
+.quick-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+}
+
+/* 书籍网格 */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.book-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s;
+}
+
+.book-card:focus-within {
+    outline: 2px solid var(--primary-color);
+}
+
+.book-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.book-author {
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 12px;
+}
+
+.book-desc {
+    font-size: 0.9em;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.read-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+/* 阅读页面 */
+.reading-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 40px;
+    min-height: 70vh;
+}
+
+.reading-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.control-btn {
+    padding: 12px 20px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.control-btn:hover {
+    transform: scale(1.02);
+    background: var(--primary-color);
+    color: white;
+}
+
+.control-btn.primary {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.nav-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+.page-nav-btn {
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.reading-content {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+.highlight {
+    background-color: rgba(255, 255, 0, 0.3);
+    transition: background 0.2s;
+}
+
+.paragraph-info {
+    text-align: center;
+    padding: 16px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9em;
+}
+
+/* 语音朗读控制栏 */
+.voice-controls {
+    background: var(--bg-color);
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* 听障/老年模式专用控制栏 */
+.reading-control-bar {
+    background: var(--bg-color);
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 帮助中心 */
+.help-section {
+    background: var(--card-bg);
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+/* 登录注册表单 */
+.auth-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 40px;
+}
+
+.auth-tabs {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.auth-tab {
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    background: none;
+    color: var(--text-color);
+}
+
+.auth-tab.active {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-group input {
+    padding: 14px;
+    font-size: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.auth-submit {
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.guest-mode {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.guest-btn {
+    padding: 12px 24px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+    .reading-container {
+        padding: 20px;
+    }
+    .control-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    .page-nav-btn {
+        padding: 8px 20px;
+    }
+    .reading-control-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .nav-controls {
+        justify-content: center;
+        margin-left: 0;
+    }
+    .header-content {
+        flex-direction: column;
+    }
+}

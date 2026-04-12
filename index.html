@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>无界阅读 - 无障碍阅读平台</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="appBody">
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo" onclick="renderHome()" tabindex="0">📖 无界阅读</div>
+            <div class="nav-links">
+                <div class="user-info" id="userInfo"></div>
+                <div class="mode-switch" role="group" aria-label="无障碍模式切换">
+                    <button class="mode-btn" data-mode="elder" id="elderModeBtn">👴 老年模式</button>
+                    <button class="mode-btn" data-mode="vision" id="visionModeBtn">👁️ 视障模式</button>
+                    <button class="mode-btn" data-mode="hearing" id="hearingModeBtn">👂 听障模式</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main" id="mainContent">
+        <div class="container">
+            <div id="app"></div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>📌 键盘操作提示：Tab 键切换焦点，Enter 键确认 | 所有书籍均为公版名著，公益免费阅读</p>
+        <p>© 2025 无界阅读 - 让阅读无障碍 | 部分资源来源：书格 (shuge.org)</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
